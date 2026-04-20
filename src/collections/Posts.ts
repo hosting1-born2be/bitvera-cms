@@ -28,6 +28,10 @@ export const Posts: CollectionConfig = {
       hooks: {
         beforeChange: [
           async ({ data }) => {
+            if (data?.slug) {
+              return slugify(data.slug, { lower: true, strict: true });
+            }
+
             if (data?.title) {
               return slugify(data.title, { lower: true, strict: true });
             }
